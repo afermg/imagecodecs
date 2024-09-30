@@ -190,10 +190,10 @@ EXTENSIONS = {
         include_dirs=['3rdparty/jpegsof3'],
     ),
     'jpegxl': ext(libraries=['jxl', 'jxl_threads']),
-    'jpegxr': ext(
-        libraries=['jpegxr', 'jxrglue'],
-        define_macros=[('__ANSI__', 1)] if sys.platform != 'win32' else [],
-    ),
+    # 'jpegxr': ext(
+    #     libraries=['jpegxr', 'jxrglue'],
+    #     define_macros=[('__ANSI__', 1)] if sys.platform != 'win32' else [],
+    # ),
     'lerc': ext(libraries=['Lerc']),
     'ljpeg': ext(
         sources=['3rdparty/liblj92/lj92.c'], include_dirs=['3rdparty/liblj92']
@@ -270,7 +270,7 @@ def customize_build_default(EXTENSIONS, OPTIONS):
     #         '/usr/include/openjpeg-2.5',
     #     )
     # )
-    EXTENSIONS['jpegxr']['include_dirs'].append('/usr/include/jxrlib')
+    # EXTENSIONS['jpegxr']['include_dirs'].append('/usr/include/jxrlib')
     # EXTENSIONS['jpeg8']['sources'] = []  # requires libjpeg-turbo v3
 
     # these extensions are required by core dependent libraries
@@ -283,7 +283,7 @@ def customize_build_default(EXTENSIONS, OPTIONS):
         'jpeg2k',
         # 'jpeg8',
         # 'jpegxl',  # requires v0.10
-        'jpegxr',
+        # 'jpegxr',
         'lerc',  # requires v4
         'lz4',
         'lzma',
@@ -394,9 +394,9 @@ def customize_build_cgohlke(EXTENSIONS, OPTIONS):
     # EXTENSIONS['jpeg2k']['include_dirs'].append(
     #     os.path.join(INCLIB, 'include', 'openjpeg-2.5')
     # )
-    EXTENSIONS['jpegxr']['include_dirs'].append(
-        os.path.join(INCLIB, 'include', 'jxrlib')
-    )
+    # EXTENSIONS['jpegxr']['include_dirs'].append(
+    #     os.path.join(INCLIB, 'include', 'jxrlib')
+    # )
     EXTENSIONS['zopfli']['include_dirs'].append(
         os.path.join(INCLIB, 'include', 'zopfli')
     )
@@ -549,19 +549,19 @@ def customize_build_condaforge(EXTENSIONS, OPTIONS):
         EXTENSIONS['zopfli']['include_dirs'] = [
             os.path.join(os.environ['LIBRARY_INC'], 'zopfli')
         ]
-        EXTENSIONS['jpegxr']['include_dirs'] = [
-            os.path.join(os.environ['LIBRARY_INC'], 'jxrlib')
-        ]
-        EXTENSIONS['jpegxr']['libraries'] = ['libjpegxr', 'libjxrglue']
-        EXTENSIONS['szip']['libraries'] = ['szip']
+        # EXTENSIONS['jpegxr']['include_dirs'] = [
+        #     os.path.join(os.environ['LIBRARY_INC'], 'jxrlib')
+        # ]
+        # EXTENSIONS['jpegxr']['libraries'] = ['libjpegxr', 'libjxrglue']
+        # EXTENSIONS['szip']['libraries'] = ['szip']
     else:
         EXTENSIONS['zopfli']['include_dirs'] = [
             os.path.join(os.environ['PREFIX'], 'include', 'zopfli')
         ]
-        EXTENSIONS['jpegxr']['include_dirs'] = [
-            os.path.join(os.environ['PREFIX'], 'include', 'jxrlib')
-        ]
-        EXTENSIONS['jpegxr']['libraries'] = ['jpegxr', 'jxrglue']
+        # EXTENSIONS['jpegxr']['include_dirs'] = [
+        #     os.path.join(os.environ['PREFIX'], 'include', 'jxrlib')
+        # ]
+        # EXTENSIONS['jpegxr']['libraries'] = ['jpegxr', 'jxrglue']
 
 
 def customize_build_macports(EXTENSIONS, OPTIONS):
@@ -578,7 +578,7 @@ def customize_build_macports(EXTENSIONS, OPTIONS):
     # del EXTENSIONS['jpegli']
     del EXTENSIONS['jpegls']
     del EXTENSIONS['jpegxl']
-    del EXTENSIONS['jpegxr']
+    # del EXTENSIONS['jpegxr']
     del EXTENSIONS['jpegxs']
     del EXTENSIONS['lerc']
     del EXTENSIONS['lz4f']
@@ -638,7 +638,7 @@ def customize_build_mingw(EXTENSIONS, OPTIONS):
     #         sys.prefix + '/include/openjpeg-2.5',
     #     )
     # )
-    EXTENSIONS['jpegxr']['include_dirs'].append(sys.prefix + '/include/jxrlib')
+    # EXTENSIONS['jpegxr']['include_dirs'].append(sys.prefix + '/include/jxrlib')
 
 
 if 'sdist' not in sys.argv:
