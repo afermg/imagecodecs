@@ -178,10 +178,10 @@ EXTENSIONS = {
     #     include_dirs=['3rdparty/openjpeg'],
     #     libraries=['openjp2', 'lcms2'],
     # ),
-    'jpeg8': ext(
-        sources=['imagecodecs/_jpeg8_legacy.pyx'],
-        libraries=['jpeg'],
-    ),
+    # 'jpeg8': ext(
+    #     sources=['imagecodecs/_jpeg8_legacy.pyx'],
+    #     libraries=['jpeg'],
+    # ),
     # 'jpegli': ext(libraries=['jpegli']),
     'jpegls': ext(libraries=['charls']),
     'jpegxs': ext(libraries=['jxs']),
@@ -281,7 +281,7 @@ def customize_build_default(EXTENSIONS, OPTIONS):
         'cms',
         'deflate',
         'jpeg2k',
-        'jpeg8',
+        # 'jpeg8',
         # 'jpegxl',  # requires v0.10
         'jpegxr',
         'lerc',  # requires v4
@@ -327,9 +327,9 @@ def customize_build_cgohlke(EXTENSIONS, OPTIONS):
     # EXTENSIONS['exr']['define_macros'].append(('TINYEXR_USE_OPENMP', 1))
     # EXTENSIONS['exr']['extra_compile_args'] = ['/openmp']
 
-    if not os.environ.get('USE_JPEG8_LEGACY', False):
-        # use libjpeg-turbo 3
-        EXTENSIONS['jpeg8']['sources'] = []
+    # if not os.environ.get('USE_JPEG8_LEGACY', False):
+    #     # use libjpeg-turbo 3
+    #     EXTENSIONS['jpeg8']['sources'] = []
 
     # EXTENSIONS['jpegli']['include_dirs'] = [
     #     os.path.join(INCLIB, 'include', 'jpegli')
@@ -470,7 +470,7 @@ def customize_build_cibuildwheel(EXTENSIONS, OPTIONS):
     # del EXTENSIONS['jpegli']
     del EXTENSIONS['pcodec']
 
-    EXTENSIONS['jpeg8']['sources'] = []  # use libjpeg-turbo 3
+    # EXTENSIONS['jpeg8']['sources'] = []  # use libjpeg-turbo 3
 
     EXTENSIONS['lzham']['libraries'] = ['lzhamdll']
     if sys.platform == 'darwin':
@@ -529,7 +529,7 @@ def customize_build_condaforge(EXTENSIONS, OPTIONS):
     del EXTENSIONS['ultrahdr']
     del EXTENSIONS['zlibng']
 
-    EXTENSIONS['jpeg8']['sources'] = []  # use libjpeg-turbo 3
+    # EXTENSIONS['jpeg8']['sources'] = []  # use libjpeg-turbo 3
 
     if sys.platform == 'win32':
         del EXTENSIONS['brunsli']  # brunsli not stable on conda-forge
@@ -630,7 +630,7 @@ def customize_build_mingw(EXTENSIONS, OPTIONS):
     del EXTENSIONS['zfp']
     del EXTENSIONS['zlibng']
 
-    EXTENSIONS['jpeg8']['sources'] = []  # use libjpeg-turbo 3
+    # EXTENSIONS['jpeg8']['sources'] = []  # use libjpeg-turbo 3
     # EXTENSIONS['jpeg2k']['include_dirs'].extend(
     #     (
     #         sys.prefix + '/include/openjpeg-2.3',
