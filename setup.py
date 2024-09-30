@@ -173,11 +173,11 @@ EXTENSIONS = {
     'heif': ext(libraries=['heif']),
     # 'htj2k': ext(libraries=['openjph']),
     'jetraw': ext(libraries=['jetraw', 'dpcore']),
-    'jpeg2k': ext(
-        sources=['3rdparty/openjpeg/color.c'],
-        include_dirs=['3rdparty/openjpeg'],
-        libraries=['openjp2', 'lcms2'],
-    ),
+    # 'jpeg2k': ext(
+    #     sources=['3rdparty/openjpeg/color.c'],
+    #     include_dirs=['3rdparty/openjpeg'],
+    #     libraries=['openjp2', 'lcms2'],
+    # ),
     'jpeg8': ext(
         sources=['imagecodecs/_jpeg8_legacy.pyx'],
         libraries=['jpeg'],
@@ -263,13 +263,13 @@ def customize_build_default(EXTENSIONS, OPTIONS):
     Works on Ubuntu 24.04
 
     """
-    EXTENSIONS['jpeg2k']['include_dirs'].extend(
-        (
-            '/usr/include/openjpeg-2.3',
-            '/usr/include/openjpeg-2.4',
-            '/usr/include/openjpeg-2.5',
-        )
-    )
+    # EXTENSIONS['jpeg2k']['include_dirs'].extend(
+    #     (
+    #         '/usr/include/openjpeg-2.3',
+    #         '/usr/include/openjpeg-2.4',
+    #         '/usr/include/openjpeg-2.5',
+    #     )
+    # )
     EXTENSIONS['jpegxr']['include_dirs'].append('/usr/include/jxrlib')
     # EXTENSIONS['jpeg8']['sources'] = []  # requires libjpeg-turbo v3
 
@@ -390,10 +390,10 @@ def customize_build_cgohlke(EXTENSIONS, OPTIONS):
     EXTENSIONS['zstd']['libraries'] = ['zstd_static']
     EXTENSIONS['lerc']['define_macros'].append(('LERC_STATIC', 1))
     EXTENSIONS['jpegls']['define_macros'].append(('CHARLS_STATIC', 1))
-    EXTENSIONS['jpeg2k']['define_macros'].append(('OPJ_STATIC', 1))
-    EXTENSIONS['jpeg2k']['include_dirs'].append(
-        os.path.join(INCLIB, 'include', 'openjpeg-2.5')
-    )
+    # EXTENSIONS['jpeg2k']['define_macros'].append(('OPJ_STATIC', 1))
+    # EXTENSIONS['jpeg2k']['include_dirs'].append(
+    #     os.path.join(INCLIB, 'include', 'openjpeg-2.5')
+    # )
     EXTENSIONS['jpegxr']['include_dirs'].append(
         os.path.join(INCLIB, 'include', 'jxrlib')
     )
@@ -536,11 +536,11 @@ def customize_build_condaforge(EXTENSIONS, OPTIONS):
 
         EXTENSIONS['lz4f']['libraries'] = ['liblz4']
         EXTENSIONS['bz2']['libraries'] = ['bzip2']
-        EXTENSIONS['jpeg2k']['include_dirs'] += [
-            os.path.join(
-                os.environ['LIBRARY_INC'], 'openjpeg-' + os.environ['openjpeg']
-            )
-        ]
+        # EXTENSIONS['jpeg2k']['include_dirs'] += [
+        #     os.path.join(
+        #         os.environ['LIBRARY_INC'], 'openjpeg-' + os.environ['openjpeg']
+        #     )
+        # ]
         EXTENSIONS['jpegls']['libraries'] = ['charls-2-x64']
         EXTENSIONS['lz4']['libraries'] = ['liblz4']
         EXTENSIONS['lzma']['libraries'] = ['liblzma']
@@ -601,13 +601,13 @@ def customize_build_macports(EXTENSIONS, OPTIONS):
     EXTENSIONS['aec']['library_dirs'] = ['%PREFIX%/lib/libaec/lib']
     EXTENSIONS['aec']['include_dirs'] = ['%PREFIX%/lib/libaec/include']
     EXTENSIONS['gif']['include_dirs'] = ['%PREFIX%/include/giflib5']
-    EXTENSIONS['jpeg2k']['include_dirs'].extend(
-        (
-            '%PREFIX%/include/openjpeg-2.3',
-            '%PREFIX%/include/openjpeg-2.4',
-            '%PREFIX%/include/openjpeg-2.5',
-        )
-    )
+    # EXTENSIONS['jpeg2k']['include_dirs'].extend(
+    #     (
+    #         '%PREFIX%/include/openjpeg-2.3',
+    #         '%PREFIX%/include/openjpeg-2.4',
+    #         '%PREFIX%/include/openjpeg-2.5',
+    #     )
+    # )
 
 
 def customize_build_mingw(EXTENSIONS, OPTIONS):
@@ -631,13 +631,13 @@ def customize_build_mingw(EXTENSIONS, OPTIONS):
     del EXTENSIONS['zlibng']
 
     EXTENSIONS['jpeg8']['sources'] = []  # use libjpeg-turbo 3
-    EXTENSIONS['jpeg2k']['include_dirs'].extend(
-        (
-            sys.prefix + '/include/openjpeg-2.3',
-            sys.prefix + '/include/openjpeg-2.4',
-            sys.prefix + '/include/openjpeg-2.5',
-        )
-    )
+    # EXTENSIONS['jpeg2k']['include_dirs'].extend(
+    #     (
+    #         sys.prefix + '/include/openjpeg-2.3',
+    #         sys.prefix + '/include/openjpeg-2.4',
+    #         sys.prefix + '/include/openjpeg-2.5',
+    #     )
+    # )
     EXTENSIONS['jpegxr']['include_dirs'].append(sys.prefix + '/include/jxrlib')
 
 
